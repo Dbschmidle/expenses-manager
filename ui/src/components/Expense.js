@@ -27,8 +27,9 @@ export const Expense = ({ expense, fetchExpenses }) => {
 
   const handleDeleteExpense = async () => {
     try {
-      await axios.delete(`${API_URL}/${expense.id}`);
-
+      console.log(`${API_URL}/${expense.id}`);
+        await axios.delete(`${API_URL}/${expense.id}`);
+        
       await fetchExpenses();
     } catch (err) {
       console.log(err);
@@ -43,7 +44,7 @@ export const Expense = ({ expense, fetchExpenses }) => {
         })}
       >
         <Checkbox checked={isPaid} onChange={handleUpdateExpenseCompletion} />
-        <Typography variant="h4">{name}</Typography>
+        <Typography variant="h4"> {name} </Typography>
       </div>
       <div className="expenseButtons">
         <Button variant="contained" onClick={() => setIsDialogOpen(true)}>

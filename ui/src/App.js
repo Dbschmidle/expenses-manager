@@ -2,7 +2,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { AddExpenseForm } from './components/AddExpenseForm';
 import { Expense } from './components/Expense';
-import axios from "axios"
+import axios from "axios";
 import React, {useState, useEffect} from "react";
 import { API_URL } from './utils';
 
@@ -17,7 +17,7 @@ export default function App() {
 
   const fetchExpenses = async () => {
     try {
-      const {data} = await axios.get(API_URL);
+      const { data } = await axios.get(API_URL);
       setExpenses(data);
 
     } catch (err){
@@ -32,7 +32,7 @@ export default function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <AddExpenseForm fetchExpenses={fetchExpenses}/>
+      <AddExpenseForm fetchExpenses={fetchExpenses} />
     {expenses.map((expense) => (
       <Expense expense={expense} key={expense.id} fetchExpenses={fetchExpenses} />
     ))}
