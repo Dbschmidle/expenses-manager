@@ -49,7 +49,7 @@ export const updateExpenses = async ({id, name, paid}) => {
             ":p": paid,
         },
         ReturnValues: "ALL_NEW",
-    })
+    });
 
     const response = await docClient.send(command);
     

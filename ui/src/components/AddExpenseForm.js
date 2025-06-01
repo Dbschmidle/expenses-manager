@@ -16,25 +16,36 @@ export const AddExpenseForm = ( {fetchExpenses} ) => {
                 paid: false,
             })
             await fetchExpenses();
+            
             setNewExpense("");
+
         } catch(err) {
             console.log(err);
         }
         
-    } 
+    };
 
   return (
     <div>
-        <Typography align="center" variant='h2' paddingTop={2} paddingBottom={2}>Expense Manager</Typography>
+        <Typography align="center" variant="h2" paddingTop={2} paddingBottom={2}>Expense Manager</Typography>
 
-        <div className='addExpenseForm'>
-            <TextField size='small' id="outlined-basic" label="Outlined" variant="outlined" value={newExpense} onChange={(e) => setNewExpense(e.target.value)} />
-            <Button disabled={!newExpense.length}  variant='outlined' onClick={addNewExpense}>
+        <div className="addExpenseForm">
+            <TextField 
+                size="small"
+                label="Expense" 
+                variant="outlined" 
+                value={newExpense} 
+                onChange={(e) => setNewExpense(e.target.value)} 
+            />
+            <Button 
+                disabled={!newExpense.length}  
+                variant='outlined' 
+                onClick={addNewExpense}
+            >
                 <AddIcon />
             </Button>
 
         </div>
-
     </div>
-  )
-}
+  );
+};
