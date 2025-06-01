@@ -3,7 +3,7 @@ import { UpdateCommand, PutCommand, DynamoDBDocumentClient, ScanCommand, DeleteC
 
 import crypto from "crypto";
 
-const client = new DynamoDBClient( {region: "us-east-1"});
+const client = new DynamoDBClient( {region: "us-east-2"});
 const docClient = DynamoDBDocumentClient.from(client);
 
 export const fetchExpenses = async () => {
@@ -25,7 +25,7 @@ export const createExpenses = async ({name, paid}) => {
         Item: {
             id: uuid,
             name,
-            paid
+            paid,
         }
     })
 
@@ -41,14 +41,14 @@ export const updateExpenses = async ({id, name, completed}) => {
             id
         },
         ExpressionAttributeNames: {
-            "#name": "name"
+            "#name": "name",
         },
         UpdateExpression: "set #name = :n, completed = :c",
         ExpressionAttributeValues: {
             ":n": name,
-            ":c": completed
+            ":c": completed,
         },
-        ReturnValues: "ALL_NEW"
+        ReturnValues: "ALL_NEW",
     })
 
     const response = await docClient.send(command);
@@ -60,8 +60,8 @@ export const deleteExpenses = async (id) => {
     const command = new DeleteCommand({
         TableName: "Expense",
         Key: {
-            id
-        }
+            id,
+        },
     });
 
     const response = await docClient.send(command);

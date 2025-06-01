@@ -1,7 +1,8 @@
 import express from "express"
 import cors from "cors"
-import { updateExpenses, createExpenses, fetchExpenses, deleteExpenses } from "./expense";
+import { updateExpenses, createExpenses, fetchExpenses, deleteExpenses } from "./expense.js";
 import serverless from "serverless-http"
+
 const app = express();
 const port = 3001;
 
@@ -17,9 +18,9 @@ app.get('/', (req, res) => {
 
 app.get('/expense', async(req, res) => {
   try {
-    const expense = await fetchExpenses();
+    const expenses = await fetchExpenses();
 
-    res.send(expense.items);
+    res.send(expenses.Items);
 
   } catch (err){
     res.status(400).send(`Error fetching expenses: ${err}`);
