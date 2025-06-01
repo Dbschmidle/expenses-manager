@@ -14,9 +14,10 @@ export const AddExpenseForm = ( {fetchExpenses} ) => {
             await axios.post(API_URL, {
                 name: newExpense,
                 paid: false,
-            })
-            await fetchExpenses();
+            });
             
+            await fetchExpenses();
+
             setNewExpense("");
 
         } catch(err) {

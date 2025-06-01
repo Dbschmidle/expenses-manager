@@ -28,7 +28,8 @@ export const Expense = ({ expense, fetchExpenses }) => {
   const handleDeleteExpense = async () => {
     try {
       console.log(`${API_URL}/${expense.id}`);
-        await axios.delete(`${API_URL}/${expense.id}`);
+
+      await axios.delete(`${API_URL}/${expense.id}`);
         
       await fetchExpenses();
     } catch (err) {
