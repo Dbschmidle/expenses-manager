@@ -1,7 +1,7 @@
-import express from "express"
-import cors from "cors"
+import express from "express";
+import cors from "cors";
 import { updateExpenses, createExpenses, fetchExpenses, deleteExpenses } from "./expense.js";
-import serverless from "serverless-http"
+import serverless from "serverless-http";
 
 const app = express();
 const port = 3001;
@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-app.get('/expense', async(req, res) => {
+app.get('/expense', async (req, res) => {
   try {
     const expenses = await fetchExpenses();
 
@@ -27,7 +27,7 @@ app.get('/expense', async(req, res) => {
   }
 });
 
-app.post('/expense', async(req, res) => {
+app.post('/expense', async (req, res) => {
    try {
     const expense = await req.body;
 
@@ -41,19 +41,19 @@ app.post('/expense', async(req, res) => {
 });
 
 app.put('/expense', async(req, res) => {
-     try {
-    const expense = await req.body;
+    try {
+        const expense = req.body;
 
-    const response = await updateExpenses(expense);
+        const response = await updateExpenses(expense);
 
-    res.send(response);
+        res.send(response);
 
-  } catch (err){
-    res.status(400).send(`Error updating expenses: ${err}`);
-  }
+    } catch (err){
+        res.status(400).send(`Error updating expenses: ${err}`);
+    }
 });
 
-app.delete('/expense/:id', async(req, res) => {
+app.delete('/expense/:id', async (req, res) => {
     try {
         const { id } = req.params;
 

@@ -1,4 +1,4 @@
-import { ListTablesCommand, DynamoDBClient, DeleteTableCommand } from "@aws-sdk/client-dynamodb";
+import { ListTablesCommand, DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { UpdateCommand, PutCommand, DynamoDBDocumentClient, ScanCommand, DeleteCommand } from "@aws-sdk/lib-dynamodb";
 
 import crypto from "crypto";
@@ -8,7 +8,7 @@ const docClient = DynamoDBDocumentClient.from(client);
 
 export const fetchExpenses = async () => {
     const command = new ScanCommand({
-        ExpressionAttributeNames: { "#name" : "name"},
+        ExpressionAttributeNames: { "#name": "name"},
         ProjectionExpression: "id, #name, paid",
         TableName: "Expenses",
     });
@@ -26,27 +26,27 @@ export const createExpenses = async ({name, paid}) => {
             id: uuid,
             name,
             paid,
-        }
-    })
+        },
+    });
 
     const response = await docClient.send(command);
     
     return response;
 };
 
-export const updateExpenses = async ({id, name, completed}) => {
+export const updateExpenses = async ({id, name, paid}) => {
     const command = new UpdateCommand({
         TableName: "Expenses",
         Key: {
-            id
+            id,
         },
         ExpressionAttributeNames: {
             "#name": "name",
         },
-        UpdateExpression: "set #name = :n, completed = :c",
+        UpdateExpression: "set #name = :n, paid = :p",
         ExpressionAttributeValues: {
             ":n": name,
-            ":c": completed,
+            ":p": paid,
         },
         ReturnValues: "ALL_NEW",
     })
