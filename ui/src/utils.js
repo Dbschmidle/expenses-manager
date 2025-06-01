@@ -1,0 +1,1 @@
+export const API_URL = "https://33uizj4udo5ivtqan5mk7j4hhu0audrc.lambda-url.us-east-2.on.aws/expense";
