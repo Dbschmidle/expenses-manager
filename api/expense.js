@@ -9,7 +9,7 @@ const docClient = DynamoDBDocumentClient.from(client);
 export const fetchExpenses = async () => {
     const command = new ScanCommand({
         ExpressionAttributeNames: { "#name" : "name" },
-        ProjectionExpression: "id, #name, paid",
+        ProjectionExpression: "id, #name, paid, amount",
         TableName: "Expenses",
     });
 
@@ -18,7 +18,7 @@ export const fetchExpenses = async () => {
     return response;
 };
 
-export const createExpenses = async ({name, paid}) => {
+export const createExpenses = async ({name, paid, amount}) => {
     const uuid = crypto.randomUUID();
     const command = new PutCommand({
         TableName: "Expenses",
@@ -26,6 +26,7 @@ export const createExpenses = async ({name, paid}) => {
             id: uuid,
             name,
             paid,
+            amount,
         },
     });
 
@@ -34,7 +35,7 @@ export const createExpenses = async ({name, paid}) => {
     return response;
 };
 
-export const updateExpenses = async ({id, name, paid}) => {
+export const updateExpenses = async ({id, name, paid, amount}) => {
     const command = new UpdateCommand({
         TableName: "Expenses",
         Key: {
@@ -43,10 +44,11 @@ export const updateExpenses = async ({id, name, paid}) => {
         ExpressionAttributeNames: {
             "#name": "name",
         },
-        UpdateExpression: "set #name = :n, paid = :p",
+        UpdateExpression: "set #name = :n, paid = :p, amount = :a",
         ExpressionAttributeValues: {
             ":n": name,
             ":p": paid,
+            ":a": amount,
         },
         ReturnValues: "ALL_NEW",
     });

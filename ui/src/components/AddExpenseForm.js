@@ -8,17 +8,20 @@ import { API_URL } from '../utils';
 
 export const AddExpenseForm = ( {fetchExpenses} ) => {
     const [newExpense, setNewExpense] = useState("");
+    const [amount, setAmount] = useState("");
 
     const addNewExpense = async () => {
         try {
             await axios.post(API_URL, {
                 name: newExpense,
                 paid: false,
+                amount: parseFloat(amount),
             });
 
             await fetchExpenses();
 
             setNewExpense("");
+            setAmount("");
 
         } catch(err) {
             console.log(err);
@@ -37,6 +40,13 @@ export const AddExpenseForm = ( {fetchExpenses} ) => {
                 variant="outlined" 
                 value={ newExpense } 
                 onChange={(e) => setNewExpense(e.target.value)} 
+            />
+            <TextField
+                size="small"
+                label="Amount"
+                variant="outlined"
+                value ={ amount }
+                onChange={(e) => setAmount(e.target.value)}
             />
             <Button 
                 disabled={!newExpense.length}  

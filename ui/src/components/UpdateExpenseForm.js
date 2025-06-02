@@ -11,8 +11,9 @@ export const UpdateExpenseForm = ({
     setIsDialogOpen, 
     expense
     }) => {
-    const { id, paid } = expense;
+    const { id, paid, amount } = expense;
     const [expenseName, setExpenseName] = useState("");
+    const [updatedAmount, setUpdatedAmount] = useState(amount ?? "");
 
     const handleUpdateExpenseName = async () => {
         try {
@@ -20,6 +21,7 @@ export const UpdateExpenseForm = ({
                 id, 
                 name: expenseName, 
                 paid,
+                amount,
             });
 
             await fetchExpenses();
@@ -40,6 +42,14 @@ export const UpdateExpenseForm = ({
                 label='Expense' 
                 variant='outlined' 
                 onChange={(e) => setExpenseName(e.target.value)}
+            />
+            <TextField 
+                size='small' 
+                label='Amount' 
+                variant='outlined' 
+                type='number'
+                value={updatedAmount}
+                onChange={(e) => setUpdatedAmount(e.target.value)}
             />
             <Button 
             variant="contained" 

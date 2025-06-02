@@ -8,7 +8,7 @@ import axios from "axios";
 import { API_URL } from "../utils";
 
 export const Expense = ({ expense, fetchExpenses }) => {
-  const { id, name, paid } = expense;
+  const { id, name, paid, amount } = expense;
   const [isPaid, setIsPaid] = useState(paid);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -18,6 +18,7 @@ export const Expense = ({ expense, fetchExpenses }) => {
         id,
         name,
         paid: !paid,
+        amount,
       });
       setIsPaid((prev) => !prev);
     } catch (err) {
@@ -45,6 +46,7 @@ export const Expense = ({ expense, fetchExpenses }) => {
       >
         <Checkbox checked={isPaid} onChange={handleUpdateExpenseCompletion} />
         <Typography variant="h4"> {name} </Typography>
+        <Typography variant="h6" color="textSecondary"> ${amount?.toFixed(2)} </Typography>
       </div>
       <div className="expenseButtons">
         <Button variant="contained" onClick={() => setIsDialogOpen(true)}>

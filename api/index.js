@@ -7,7 +7,9 @@ const app = express();
 const port = 3001;
 
 app.use(express.json());
-app.use(cors());
+
+// disabled, AWS config seems to automatically manage this
+//app.use(cors());
 
 
 app.get('/', (req, res) => {
