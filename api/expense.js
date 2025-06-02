@@ -58,7 +58,7 @@ export const updateExpenses = async ({id, name, paid}) => {
 
 export const deleteExpenses = async (id) => {
     const command = new DeleteCommand({
-        TableName: "Expense",
+        TableName: "Expenses",
         Key: {
             id,
         },
