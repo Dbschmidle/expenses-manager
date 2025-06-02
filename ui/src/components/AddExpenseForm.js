@@ -15,7 +15,7 @@ export const AddExpenseForm = ( {fetchExpenses} ) => {
                 name: newExpense,
                 paid: false,
             });
-            
+
             await fetchExpenses();
 
             setNewExpense("");
@@ -35,7 +35,7 @@ export const AddExpenseForm = ( {fetchExpenses} ) => {
                 size="small"
                 label="Expense" 
                 variant="outlined" 
-                value={newExpense} 
+                value={ newExpense } 
                 onChange={(e) => setNewExpense(e.target.value)} 
             />
             <Button 

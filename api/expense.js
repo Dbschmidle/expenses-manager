@@ -8,7 +8,7 @@ const docClient = DynamoDBDocumentClient.from(client);
 
 export const fetchExpenses = async () => {
     const command = new ScanCommand({
-        ExpressionAttributeNames: { "#name": "name" },
+        ExpressionAttributeNames: { "#name" : "name" },
         ProjectionExpression: "id, #name, paid",
         TableName: "Expenses",
     });

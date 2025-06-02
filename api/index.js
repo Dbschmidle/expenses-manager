@@ -1,16 +1,14 @@
 import express from "express";
 import cors from "cors";
 import { updateExpenses, createExpenses, fetchExpenses, deleteExpenses } from "./expense.js";
-import serverless from "serverless-http";
+import serverlessExpress from "@vendia/serverless-express";
 
 const app = express();
 const port = 3001;
 
 app.use(express.json());
+app.use(cors());
 
-if (process.env.DEVELOPMENT){
-    app.use(cors());
-}
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
@@ -28,10 +26,11 @@ app.get('/expense', async (req, res) => {
 });
 
 app.post('/expense', async (req, res) => {
+  console.log("Headers:", req.headers);
+  console.log("Raw body:", req.body);
    try {
-    const expense = await req.body;
 
-    const response = await createExpenses(expense);
+    const response = await createExpenses(req.body);
 
     res.send(response);
 
@@ -73,4 +72,4 @@ if(process.env.DEVELOPMENT){
 }
 
 
-export const handler = serverless(app);
+export const handler = serverlessExpress({app});
