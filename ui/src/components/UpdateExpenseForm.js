@@ -21,12 +21,12 @@ export const UpdateExpenseForm = ({
                 id, 
                 name: expenseName, 
                 paid,
-                amount,
+                amount: parseFloat(updatedAmount),
             });
 
             await fetchExpenses();
 
-            setExpenseName("");
+           setExpenseName("");
 
         } catch (err) {
             console.log(err);
@@ -40,7 +40,8 @@ export const UpdateExpenseForm = ({
             <TextField 
                 size='small' 
                 label='Expense' 
-                variant='outlined' 
+                variant='outlined'
+                value={expenseName}
                 onChange={(e) => setExpenseName(e.target.value)}
             />
             <TextField 
