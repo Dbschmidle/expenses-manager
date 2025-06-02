@@ -1,4 +1,6 @@
 # Expense Manager - Full Stack React CRUD App 
+A full-stack web application for tracking and managing personal expenses. Built with React for the frontend and Express.js hosted on AWS Lambda via Lambda Function URLs for a serverless backend. AWS DynamoDB is used as a NoSQL database to store expense data, supporting full CRUD operations (create, read, update, delete). The application is deployed using AWS Amplify, and the project is version-controlled with Git and hosted on GitHub.
+
 
 ## Web Application Link
 
